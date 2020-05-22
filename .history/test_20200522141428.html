@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+function BinarySearchTree() {
+  var Node = function(key) {
+    this.key = key;
+    this.left = null;
+    this.right = null;
+  }
+  var root = null;
+  BinarySearchTree.prototype.insert = function(key) {
+    var insertNode = function(node, newNode) {
+      if(newNode.key < node.key) {
+        if(node.left === null) {
+          node.left = newNode
+        }else {
+          insertNode(node.left, newNode)
+        }
+      }else {
+        if(node.right === null) {
+          node.right = newNode
+        }else {
+          inserNode(node.right, newNode)
+        }
+      }
+    }
+    var newNode = new Node(key);
+    if(root === null) {
+      root = newNode;
+    }else {
+      insertNode(root, newNode)
+    }
+  }
+
+  // 中序遍历
+  BinarySearchTree.prototype.inOrderTraverse = function(callback) {
+    this.inOrderTraverseNode(root, callback)
+  }
+  BinarySearchTree.prototype.inOrderTraverseNode = function(node, callback) {
+    if(node !== null) {
+      this.inOrderTraverseNode(node.left, callback);
+      callback(node.key);
+      this.inOrderTraverseNode(node.right, callback);
+    }
+  }
+
+  // 先序遍历
+  BinarySearchTree.prototype.preOrderTraverse(callback) {
+    this.preOrderTraverseNode(root, callback);
+  }
+  BinarySearchTree.prototype.preOrderTraverseNode(node, callback) {
+    if(node !== null) {
+      callback(node.key);
+      this.preOrderTraverseNode(node.left, callback);
+      this.preOrderTraverseNode(node.right, callback);
+    }
+  }
+}
+    </script>
+</body>
+
+</html>

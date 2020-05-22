@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+               function Queue() {
+            // 这里是属性和方法
+            this.items = [];
+            Queue.prototype.enqueue = function (element) {
+                this.items.push(element);
+            };
+            Queue.prototype.dequeue = function () {
+                this.items.shift();
+            };
+            Queue.prototype.front = function () {
+                return this.items[0]
+            };
+            Queue.prototype.isEmpty = function () {
+                return this.items.length === 0;
+            };
+            Queue.prototype.clear = function () {
+                this.items = [];
+            };
+            Queue.prototype.size = function () {
+                return this.items.length;
+            };
+            Queue.prototype.print = function () {
+                console.log(this.items.toString(), this.items)
+            }
+        }
+        function PriorityQueue() {
+            this.items = [];
+            // 在PriorityQueue重新创建了一个类，可以裂解为内部类
+            function QueueElement(element, priority) {
+                this.element = element;
+                this.priority = priority;
+            }
+            // 实现插入方法
+            PriorityQueue.prototype.enqueue = function (element, priority) {
+                var queueElement = new QueueElement(element, priority);
+                if (this.items.length === 0) {
+                    this.items.push(queueElement);
+                } else {
+                    var added = false;
+                    for (var i = 0; i < this.items.length; i++) {
+                        if (queueElement.priority < this.items[i].priority) {
+                            this.items.splice(i, 0, queueElement);
+                            added = true;
+                            break;
+                        }
+                    }
+                }
+                if (!added) {
+                    this.items.push(queueElement)
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

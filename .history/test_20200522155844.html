@@ -32,7 +32,7 @@
                         if (node.right === null) {
                             node.right = newNode
                         } else {
-                            insertNode(node.right, newNode)
+                            inserNode(node.right, newNode)
                         }
                     }
                 }
@@ -70,7 +70,7 @@
 
             // 后序遍历
             BinarySearchTree.prototype.postOrderTraverse = function (callback) {
-                this.postOrderTraverseNode(root, callback);
+                this.postOrderTraverseNode(this.root, callback);
             }
 
             BinarySearchTree.prototype.postOrderTraverseNode = function (node, callback) {
@@ -86,7 +86,7 @@
                 const ret = this.getMinNode();
                 return ret && ret.key;
             }
-            BinarySearchTree.prototype.getMinNode = function (node = root) {
+            BinarySearchTree.prototype.getMinNode = function (node = this.root) {
                 while (node && node.left) {
                     node = node.left;
                 }
@@ -96,8 +96,8 @@
                 const ret = this.getMaxNode();
                 return ret && ret.key;
             }
-            BinarySearchTree.prototype.getMaxNode = function (node = root) {
-                while (node && node.right) {
+            BinarySearchTree.prototype.getMaxNode = function (node = this.root) {
+                if (node && node.right) {
                     node = node.right
                 }
                 return node;
@@ -105,12 +105,11 @@
 
             // 查找
             BinarySearchTree.prototype.find = function (key) {
-                const ret = this.fineNode(root, key);
+                const ret = this.fineNode(this.root, key);
                 return ret && ret.key;
             }
             BinarySearchTree.prototype.fineNode = function (node, key) {
                 if (node === null) return null;
-                if (node.key === key) return node;
                 if (key < node.key) {
                     return this.fineNode(node.left, key)
                 } else {
@@ -119,12 +118,11 @@
                 return node
             }
 
-
-            BinarySearchTree.prototype.remove = function (key) {
-                return this.removeNode(root, key);
+            BinarySearchTree.prototype.remove = function(key) {
+                return this.removeNode(this.root, key);
             }
 
-            BinarySearchTree.prototype.removeNode = function (node, key) {
+            BinarySearchTree.prototype.removeNode = function(node, key) {
                 if (node === null) {
                     return null;
                 }
